@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  mms_database:
+    container_name: mms_database
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: docker
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+    restart: always
+    volumes:
+      - ./database/data:/var/lib/mysql
+      - ./database/config/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./database/initialize:/docker-entrypoint-initdb.d
+    networks:
+      - mms_database-network
+
+networks:
+  mms_database-network:
+    driver: bridge
