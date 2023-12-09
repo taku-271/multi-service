@@ -1,0 +1,14 @@
+{
+  "name": "manage-money",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "frontend": "npm run dev --prefix ./packages/frontend",
+    "dev": "npm run frontend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Program",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/packages/backend",
+      "runtimeExecutable": "${workspaceFolder}/packages/backend/node_modules/.bin/nodemon",
+      "program": "${workspaceFolder}/packages/backend/src/app.js",
+      "restart": true,
+      "sourceMaps": true
+    }
+  ]
+}
