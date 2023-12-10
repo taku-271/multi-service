@@ -1,6 +1,6 @@
 node_modules/
 docker/database/data
-docker/.env
+.env
 
 
 sw.js
