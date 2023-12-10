@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { getSchedules } from "@/services/schedule";
+import { createSchedule, getSchedules } from "@/services/schedule";
 
 const app = express();
 const PORT = 3001;
@@ -20,6 +20,12 @@ app.get("/", (req, res) => {
 
 app.get("/api/schedules", async (req, res) => {
   const result = await getSchedules();
+
+  res.json(result);
+});
+
+app.post("/api/schedule/create", async (req, res) => {
+  const result = await createSchedule(req.body);
 
   res.json(result);
 });

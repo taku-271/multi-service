@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-import { Schedule } from "@/types/types";
+import { ScheduleType } from "@/types/types";
 
 export const useGetSchedulesQuery = () => {
   return useQuery({
-    queryKey: "schedules",
+    queryKey: "getSchedules",
     queryFn: async () => {
-      const { data } = await axios.get<Schedule[]>(
+      const { data } = await axios.get<ScheduleType[]>(
         "http://localhost:3001/api/schedules"
       );
 
