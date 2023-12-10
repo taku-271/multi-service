@@ -1,5 +1,7 @@
 node_modules/
-database/
+docker/database/data
+docker/.env
+
 
 sw.js
 sw.js.map
