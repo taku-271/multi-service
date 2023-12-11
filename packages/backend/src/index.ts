@@ -1,6 +1,11 @@
 import express from "express";
 import cors from "cors";
-import { createSchedule, getSchedules } from "@/services/schedule";
+import {
+  createSchedule,
+  deleteSchedule,
+  getSchedules,
+  updateSchedule,
+} from "@/services/schedule";
 
 const app = express();
 const PORT = 3001;
@@ -26,6 +31,20 @@ app.get("/api/schedules", async (req, res) => {
 
 app.post("/api/schedule/create", async (req, res) => {
   const result = await createSchedule(req.body);
+
+  res.json(result);
+});
+
+app.delete("/api/schedule/delete/:id", async (req, res) => {
+  const id = req.params.id;
+  const result = await deleteSchedule(Number(id));
+
+  res.json(result);
+});
+
+app.post("/api/schedule/edit/:id", async (req, res) => {
+  const data = req.body;
+  const result = await updateSchedule(data);
 
   res.json(result);
 });
