@@ -1,9 +1,9 @@
-import { useGetSchedulesQuery } from "@/schedule/hooks/query";
+import { useGetSchedulesQuery } from "@/features/schedule/hooks/query";
 import {
   useCreateScheduleMutation,
   useDeleteScheduleMutation,
   useUpdateScheduleMutation,
-} from "@/schedule/hooks/mutate";
+} from "@/features/schedule/hooks/mutate";
 
 export const useGetSchedules = () => {
   const { data, isLoading, error } = useGetSchedulesQuery();
