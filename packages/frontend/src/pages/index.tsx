@@ -3,7 +3,7 @@ import {
   useDeleteSchedule,
   useUpdateSchedule,
   useGetSchedules,
-} from "@/schedule/hooks/store";
+} from "@/features/schedule/hooks/store";
 import { createScheduleType, updateScheduleType } from "@/types/types";
 import { formatYearMonthDate } from "@/utils/formatDate";
 import {
