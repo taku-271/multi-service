@@ -15,3 +15,17 @@ export const useGetSchedulesQuery = () => {
     cacheTime: 0,
   });
 };
+
+export const useGetSchedulesByDateQuery = (date: Date) => {
+  return useQuery({
+    queryKey: ["getScheduleByDate", date],
+    queryFn: async () => {
+      const { data } = await axios.get<ScheduleType[]>(
+        `http://localhost:3001/api/schedules/${date}`
+      );
+
+      return data;
+    },
+    cacheTime: 0,
+  });
+};

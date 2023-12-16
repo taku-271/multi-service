@@ -26,6 +26,7 @@ export const useDeleteScheduleMutation = () => {
     mutationKey: ["deleteSchedule"],
     onSuccess: () => {
       queryClient.invalidateQueries(["getSchedules"]);
+      queryClient.invalidateQueries(["getScheduleByDate"]);
     },
     mutationFn: async (id: number) => {
       return await axios.delete(
