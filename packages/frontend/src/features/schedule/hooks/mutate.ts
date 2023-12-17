@@ -8,7 +8,8 @@ export const useCreateScheduleMutation = () => {
   return useMutation<unknown, unknown, createScheduleType>({
     mutationKey: ["createSchedule"],
     onSuccess: () => {
-      queryClient.invalidateQueries(["getSchedules"]);
+      queryClient.refetchQueries(["getSchedules"]);
+      queryClient.refetchQueries(["getScheduleByDate"]);
     },
     mutationFn: async (newSchedule) => {
       return await axios.post(
@@ -25,8 +26,8 @@ export const useDeleteScheduleMutation = () => {
   return useMutation<unknown, unknown, number>({
     mutationKey: ["deleteSchedule"],
     onSuccess: () => {
-      queryClient.invalidateQueries(["getSchedules"]);
-      queryClient.invalidateQueries(["getScheduleByDate"]);
+      queryClient.refetchQueries(["getSchedules"]);
+      queryClient.refetchQueries(["getScheduleByDate"]);
     },
     mutationFn: async (id: number) => {
       return await axios.delete(
@@ -42,7 +43,7 @@ export const useUpdateScheduleMutation = () => {
   return useMutation<unknown, unknown, { data: updateScheduleType }>({
     mutationKey: ["updateSchedule"],
     onSuccess: () => {
-      queryClient.invalidateQueries(["getSchedules"]);
+      queryClient.refetchQueries(["getSchedules"]);
     },
     mutationFn: async ({ data }) => {
       return await axios.put(

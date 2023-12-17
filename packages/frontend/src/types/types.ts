@@ -6,6 +6,14 @@ export type ScheduleType = {
   end: Date;
 };
 
+export type eventScheduleType = {
+  id: string;
+  title: string;
+  description?: string;
+  start: string;
+  end: string;
+};
+
 export type createScheduleType = {
   title: string;
   description?: string;

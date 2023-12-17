@@ -4,6 +4,7 @@ import {
   createSchedule,
   deleteSchedule,
   getSchedules,
+  getSchedulesByDate,
   updateSchedule,
 } from "@/services/schedule";
 
@@ -25,6 +26,12 @@ app.get("/", (req, res) => {
 
 app.get("/api/schedules", async (req, res) => {
   const result = await getSchedules();
+
+  res.json(result);
+});
+
+app.get("/api/schedules/:date", async (req, res) => {
+  const result = await getSchedulesByDate(new Date(req.params.date));
 
   res.json(result);
 });

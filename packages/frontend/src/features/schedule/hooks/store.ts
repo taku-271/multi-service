@@ -1,9 +1,13 @@
-import { useGetSchedulesQuery } from "@/features/schedule/hooks/query";
+import {
+  useGetSchedulesByDateQuery,
+  useGetSchedulesQuery,
+} from "@/features/schedule/hooks/query";
 import {
   useCreateScheduleMutation,
   useDeleteScheduleMutation,
   useUpdateScheduleMutation,
 } from "@/features/schedule/hooks/mutate";
+import { formatYearMonthDateForEvents } from "@/utils/formatDate";
 
 export const useGetSchedules = () => {
   const { data, isLoading, error } = useGetSchedulesQuery();
@@ -12,7 +16,27 @@ export const useGetSchedules = () => {
     throw error;
   }
 
-  return { schedules: data, isGetSchedulesLoading: isLoading };
+  const schedules = data?.map((schedule) => {
+    return {
+      id: String(schedule.id),
+      title: schedule.title,
+      description: schedule.description,
+      start: formatYearMonthDateForEvents(schedule.start),
+      end: formatYearMonthDateForEvents(schedule.end),
+    };
+  });
+
+  return { schedules, isGetSchedulesLoading: isLoading };
+};
+
+export const useGetSchedulesByDate = (date: Date) => {
+  const { data, isLoading, error } = useGetSchedulesByDateQuery(date);
+
+  if (error) {
+    throw error;
+  }
+
+  return { schedules: data, isGetScheduleByDateLoading: isLoading };
 };
 
 export const useCreateSchedule = () => {

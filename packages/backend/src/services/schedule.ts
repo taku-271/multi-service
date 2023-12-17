@@ -1,10 +1,22 @@
 import { createScheduleType, updateScheduleType } from "@/types/types";
 import { PrismaClient } from "@prisma/client";
+import dayjs from "dayjs";
 
 const prisma = new PrismaClient();
 
 export const getSchedules = async () => {
   return await prisma.schedule.findMany();
+};
+
+export const getSchedulesByDate = async (date: Date) => {
+  return await prisma.schedule.findMany({
+    where: {
+      start: {
+        gte: date,
+        lt: dayjs(date).add(1, "d").toDate(),
+      },
+    },
+  });
 };
 
 export const createSchedule = async (newSchedule: createScheduleType) => {
