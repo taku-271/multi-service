@@ -18,4 +18,5 @@ model Schedule {
   description String    @default("")
   start       DateTime
   end         DateTime
+  isAllDay    Boolean
 }
