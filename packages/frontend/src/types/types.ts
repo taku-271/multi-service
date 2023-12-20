@@ -4,6 +4,7 @@ export type ScheduleType = {
   description: string;
   start: Date;
   end: Date;
+  isAllDay: boolean;
 };
 
 export type createScheduleType = {
@@ -11,6 +12,7 @@ export type createScheduleType = {
   description?: string;
   start: Date;
   end: Date;
+  isAllDay: boolean;
 };
 
 export type updateScheduleType = {
@@ -19,4 +21,5 @@ export type updateScheduleType = {
   description?: string;
   start: Date;
   end: Date;
+  isAllDay: boolean;
 };
