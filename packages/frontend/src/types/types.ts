@@ -1,9 +1,18 @@
 export type ScheduleType = {
   id: number;
   title: string;
-  description: string;
+  description?: string;
   start: Date;
   end: Date;
+  isAllDay: boolean;
+};
+
+export type eventScheduleType = {
+  id: string;
+  title: string;
+  description?: string;
+  start: string;
+  end: string;
 };
 
 export type createScheduleType = {
@@ -11,6 +20,7 @@ export type createScheduleType = {
   description?: string;
   start: Date;
   end: Date;
+  isAllDay: boolean;
 };
 
 export type updateScheduleType = {
@@ -19,4 +29,5 @@ export type updateScheduleType = {
   description?: string;
   start: Date;
   end: Date;
+  isAllDay: boolean;
 };
