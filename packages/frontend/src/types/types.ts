@@ -1,7 +1,7 @@
 export type ScheduleType = {
   id: number;
   title: string;
-  description: string;
+  description?: string;
   start: Date;
   end: Date;
 };
