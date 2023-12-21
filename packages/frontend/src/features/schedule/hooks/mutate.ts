@@ -44,7 +44,7 @@ export const useUpdateScheduleMutation = () => {
     mutationKey: ["updateSchedule"],
     onSuccess: () => {
       queryClient.refetchQueries(["getSchedules"]);
-      queryClient.refetchQueries(["getSchedulesByDate"]);
+      queryClient.refetchQueries(["getScheduleByDate"]);
     },
     mutationFn: async ({ data }) => {
       return await axios.put(
