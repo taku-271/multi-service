@@ -1,4 +1,7 @@
-import { formatYearMonthDate } from "@/utils/formatDate";
+import {
+  formatYearMonthDate,
+  formatYearMonthDateHourMinute,
+} from "@/utils/formatDate";
 import {
   Box,
   Button,
@@ -76,6 +79,18 @@ export const ScheduleDetailDialog = ({
                     >
                       <h4>{schedule.title}</h4>
                       <Typography>{schedule.description}</Typography>
+                      {!schedule.isAllDay && (
+                        <>
+                          <Typography>
+                            開始日：
+                            {formatYearMonthDateHourMinute(schedule.start)}
+                          </Typography>
+                          <Typography>
+                            終了日：
+                            {formatYearMonthDateHourMinute(schedule.end)}
+                          </Typography>
+                        </>
+                      )}
                       <Box sx={{ display: "flex", justifyContent: "right" }}>
                         <Button
                           variant="outlined"
