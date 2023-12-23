@@ -9,7 +9,6 @@ import {
   FormControl,
   FormLabel,
   Input,
-  TextField,
   Typography,
 } from "@mui/material";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -50,18 +49,19 @@ export const ScheduleCreateDialog = ({
   ) => {
     const nodeValue = e.target.attributes[2].nodeValue;
 
-    if (nodeValue === "datetime-local") {
-      setSchedule({ ...schedule, [e.target.id]: new Date(e.target.value) });
-      return;
+    switch (nodeValue) {
+      case "datetime-local":
+        setSchedule({ ...schedule, [e.target.id]: new Date(e.target.value) });
+        return;
+      case "checkbox":
+        setSchedule({
+          ...schedule,
+          [e.target.id]: (e.target as HTMLInputElement).checked,
+        });
+        return;
+      case "text":
+        setSchedule({ ...schedule, [e.target.id]: e.target.value });
     }
-    if (nodeValue === "checkbox") {
-      setSchedule({
-        ...schedule,
-        [e.target.id]: (e.target as HTMLInputElement).checked,
-      });
-      return;
-    }
-    setSchedule({ ...schedule, [e.target.id]: e.target.value });
   };
 
   const onCreateScheduleSubmit = (e: FormEvent<HTMLFormElement>) => {
