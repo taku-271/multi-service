@@ -36,8 +36,8 @@ export const ScheduleCreateDialog = ({
   const initSchedule: ScheduleInfo = {
     title: "",
     description: "",
-    start: new Date(),
-    end: new Date(),
+    start: selectedDate,
+    end: selectedDate,
     isAllDay: false,
   };
 
@@ -72,9 +72,8 @@ export const ScheduleCreateDialog = ({
       return;
     }
 
-    if (schedule.isAllDay) {
-      setSchedule({ ...schedule, start: selectedDate, end: selectedDate });
-    }
+    console.log(schedule);
+
     createSchedule(schedule);
     setSchedule(initSchedule);
     onCloseCreateDialog();
