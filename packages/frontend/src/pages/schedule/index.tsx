@@ -9,12 +9,14 @@ import { useEffect, useState } from "react";
 import { useGetSchedules } from "@/features/schedule/hooks/store";
 import { formatYearMonthDateForEvents } from "@/utils/formatDate";
 import { eventScheduleType } from "@/types/types";
-import { CircularProgress } from "@mui/material";
+import { Box, Button, CircularProgress } from "@mui/material";
+import { useRouter } from "next/router";
 
 const ScheduleCalendar = () => {
   const [isDetailDialogOpen, setIsDetailDialogOpen] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const { schedules, isGetSchedulesLoading } = useGetSchedules();
+  const { push } = useRouter();
 
   const onEventClick = (dataClickInfo: DateClickArg) => {
     setSelectedDate(dataClickInfo.date);
@@ -27,6 +29,11 @@ const ScheduleCalendar = () => {
 
   return (
     <>
+      <Box sx={{ m: 2 }}>
+        <Button variant="contained" onClick={() => push("/")}>
+          トップへ
+        </Button>
+      </Box>
       {isGetSchedulesLoading ? (
         <CircularProgress />
       ) : (
