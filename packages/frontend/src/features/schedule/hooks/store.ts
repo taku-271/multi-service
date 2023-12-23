@@ -21,8 +21,12 @@ export const useGetSchedules = () => {
       id: String(schedule.id),
       title: schedule.title,
       description: schedule.description,
-      start: formatYearMonthDateForEvents(schedule.start),
-      end: formatYearMonthDateForEvents(schedule.end),
+      start: schedule.isAllDay
+        ? formatYearMonthDateForEvents(schedule.start)
+        : schedule.start,
+      end: schedule.isAllDay
+        ? formatYearMonthDateForEvents(schedule.end)
+        : schedule.end,
     };
   });
 

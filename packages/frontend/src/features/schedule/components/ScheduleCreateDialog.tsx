@@ -2,18 +2,17 @@ import { formatYearMonthDate } from "@/utils/formatDate";
 import {
   Box,
   Button,
+  Checkbox,
   Dialog,
   DialogContent,
   DialogTitle,
   FormControl,
   FormLabel,
   Input,
-  TextField,
   Typography,
 } from "@mui/material";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useCreateSchedule } from "@/features/schedule/hooks/store";
-import { createScheduleType } from "@/types/types";
 
 type ScheduleCreateDialogProps = {
   isCreateDialogOpen: boolean;
@@ -29,21 +28,40 @@ export const ScheduleCreateDialog = ({
   type ScheduleInfo = {
     title: string;
     description: string;
+    start: Date;
+    end: Date;
+    isAllDay: boolean;
   };
 
   const initSchedule: ScheduleInfo = {
     title: "",
     description: "",
+    start: selectedDate,
+    end: selectedDate,
+    isAllDay: false,
   };
 
   const { createSchedule } = useCreateSchedule();
   const [schedule, setSchedule] = useState<ScheduleInfo>(initSchedule);
-  const [count, setCount] = useState<number>(0);
 
   const onChangeSchedule = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setSchedule({ ...schedule, [e.target.id]: e.target.value });
+    const nodeValue = e.target.attributes[2].nodeValue;
+
+    switch (nodeValue) {
+      case "datetime-local":
+        setSchedule({ ...schedule, [e.target.id]: new Date(e.target.value) });
+        return;
+      case "checkbox":
+        setSchedule({
+          ...schedule,
+          [e.target.id]: (e.target as HTMLInputElement).checked,
+        });
+        return;
+      case "text":
+        setSchedule({ ...schedule, [e.target.id]: e.target.value });
+    }
   };
 
   const onCreateScheduleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -54,12 +72,7 @@ export const ScheduleCreateDialog = ({
       return;
     }
 
-    createSchedule({
-      ...schedule,
-      start: selectedDate,
-      end: selectedDate,
-      isAllDay: true,
-    });
+    createSchedule(schedule);
     setSchedule(initSchedule);
     onCloseCreateDialog();
   };
@@ -88,6 +101,32 @@ export const ScheduleCreateDialog = ({
               onChange={(e) => onChangeSchedule(e)}
             />
           </FormControl>
+          <FormControl color="primary" sx={{ width: "100%", mb: 3 }}>
+            <FormLabel htmlFor="isAllDay">終日</FormLabel>
+            <Checkbox id="isAllDay" onChange={(e) => onChangeSchedule(e)} />
+          </FormControl>
+          {!schedule.isAllDay && (
+            <>
+              <FormControl color="primary" sx={{ width: "100%", mb: 3 }}>
+                <FormLabel htmlFor="start">開始日</FormLabel>
+                <Input
+                  type="datetime-local"
+                  id="start"
+                  fullWidth
+                  onChange={(e) => onChangeSchedule(e)}
+                />
+              </FormControl>
+              <FormControl color="primary" sx={{ width: "100%", mb: 3 }}>
+                <FormLabel htmlFor="end">終了日</FormLabel>
+                <Input
+                  type="datetime-local"
+                  id="end"
+                  fullWidth
+                  onChange={(e) => onChangeSchedule(e)}
+                />
+              </FormControl>
+            </>
+          )}
           <Button type="submit" variant="contained" fullWidth>
             スケジュール登録
           </Button>
