@@ -24,6 +24,7 @@ const Index = () => {
     description: "",
     start: new Date(),
     end: new Date(),
+    isAllDay: true,
   };
   const { schedules, isGetSchedulesLoading } = useGetSchedules();
   const { createSchedule } = useCreateSchedule();
@@ -167,8 +168,7 @@ const Index = () => {
               <h2>{schedule.title}</h2>
               <p>{schedule.description}</p>
               <p>
-                {formatYearMonthDate(schedule.start)}～
-                {formatYearMonthDate(schedule.end)}
+                {schedule.start}～{schedule.end}
               </p>
               <Box
                 sx={{
@@ -194,15 +194,14 @@ const Index = () => {
                   <h4>{schedule.title}</h4>
                   <p>{schedule.description}</p>
                   <p>
-                    {formatYearMonthDate(schedule.start)}～
-                    {formatYearMonthDate(schedule.end)}
+                    {schedule.start}～{schedule.end}
                   </p>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={onCloseDeleteDialog}>キャンセル</Button>
                   <Button
                     onClick={() => {
-                      onDeleteSchedule(schedule.id);
+                      onDeleteSchedule(Number(schedule.id));
                       onCloseDeleteDialog();
                     }}
                     color="error"

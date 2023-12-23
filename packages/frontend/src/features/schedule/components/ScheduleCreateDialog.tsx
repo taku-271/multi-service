@@ -54,7 +54,12 @@ export const ScheduleCreateDialog = ({
       return;
     }
 
-    createSchedule({ ...schedule, start: selectedDate, end: selectedDate });
+    createSchedule({
+      ...schedule,
+      start: selectedDate,
+      end: selectedDate,
+      isAllDay: true,
+    });
     setSchedule(initSchedule);
     onCloseCreateDialog();
   };
