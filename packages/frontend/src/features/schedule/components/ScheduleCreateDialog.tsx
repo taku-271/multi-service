@@ -49,6 +49,7 @@ export const ScheduleCreateDialog = ({
     if (isAllDay) {
       setSchedule({ ...schedule, start: selectedDate, end: selectedDate });
     }
+    // FIXME
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [schedule.isAllDay, selectedDate]);
 
