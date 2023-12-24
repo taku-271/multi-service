@@ -11,7 +11,7 @@ import {
   Input,
   Typography,
 } from "@mui/material";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useCreateSchedule } from "@/features/schedule/hooks/store";
 
 type ScheduleCreateDialogProps = {
@@ -43,6 +43,14 @@ export const ScheduleCreateDialog = ({
 
   const { createSchedule } = useCreateSchedule();
   const [schedule, setSchedule] = useState<ScheduleInfo>(initSchedule);
+  const { isAllDay } = schedule;
+
+  useEffect(() => {
+    if (isAllDay) {
+      setSchedule({ ...schedule, start: selectedDate, end: selectedDate });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [schedule.isAllDay, selectedDate]);
 
   const onChangeSchedule = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -64,6 +72,7 @@ export const ScheduleCreateDialog = ({
     }
   };
 
+  // FIXME: state関連のバグあり
   const onCreateScheduleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -72,6 +81,7 @@ export const ScheduleCreateDialog = ({
       return;
     }
 
+    console.log(schedule);
     createSchedule(schedule);
     setSchedule(initSchedule);
     onCloseCreateDialog();
@@ -103,7 +113,11 @@ export const ScheduleCreateDialog = ({
           </FormControl>
           <FormControl color="primary" sx={{ width: "100%", mb: 3 }}>
             <FormLabel htmlFor="isAllDay">終日</FormLabel>
-            <Checkbox id="isAllDay" onChange={(e) => onChangeSchedule(e)} />
+            <Checkbox
+              id="isAllDay"
+              checked={schedule.isAllDay}
+              onChange={(e) => onChangeSchedule(e)}
+            />
           </FormControl>
           {!schedule.isAllDay && (
             <>
