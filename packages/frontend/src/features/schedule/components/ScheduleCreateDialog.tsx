@@ -43,10 +43,9 @@ export const ScheduleCreateDialog = ({
 
   const { createSchedule } = useCreateSchedule();
   const [schedule, setSchedule] = useState<ScheduleInfo>(initSchedule);
-  const { isAllDay } = schedule;
 
   useEffect(() => {
-    if (isAllDay) {
+    if (schedule.isAllDay) {
       setSchedule({ ...schedule, start: selectedDate, end: selectedDate });
     }
     // FIXME
