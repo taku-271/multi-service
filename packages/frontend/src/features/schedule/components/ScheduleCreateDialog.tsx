@@ -111,7 +111,7 @@ export const ScheduleCreateDialog = ({
               onChange={(e) => onChangeSchedule(e)}
             />
           </FormControl>
-          <FormControl color="primary" sx={{ width: "100%", mb: 3 }}>
+          <FormControl color="primary" sx={{ mb: 3 }}>
             <FormLabel htmlFor="isAllDay">終日</FormLabel>
             <Checkbox
               id="isAllDay"
