@@ -27,7 +27,7 @@ export const ScheduleCreateDialog = ({
 }: ScheduleCreateDialogProps) => {
   type ScheduleInfo = {
     title: string;
-    description: string;
+    description?: string;
     start: Date;
     end: Date;
     isAllDay: boolean;
@@ -76,7 +76,7 @@ export const ScheduleCreateDialog = ({
   const onCreateScheduleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (schedule.title === "" || schedule.description === "") {
+    if (schedule.title === "") {
       alert("タイトルと説明は必須です");
       return;
     }

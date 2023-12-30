@@ -78,7 +78,9 @@ export const ScheduleDetailDialog = ({
                       sx={{ border: "1px solid #ccc", p: 2, mb: 2 }}
                     >
                       <h4>{schedule.title}</h4>
-                      <Typography>{schedule.description}</Typography>
+                      {schedule.description && (
+                        <Typography>{schedule.description}</Typography>
+                      )}
                       {!schedule.isAllDay && (
                         <>
                           <Typography>
