@@ -1,4 +1,5 @@
 import { Box, Button } from "@mui/material";
+import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const Index = () => {
@@ -16,6 +17,7 @@ const Index = () => {
       <Button variant="contained" onClick={() => push("/schedule")}>
         スケジュール管理
       </Button>
+      <Button onClick={() => signOut()}>サインアウト</Button>
     </Box>
   );
 };

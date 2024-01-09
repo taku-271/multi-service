@@ -27,13 +27,14 @@ export default NextAuth({
         });
 
         if (user.data && user.data.password === hashedPassword) {
-          console.log(user.data);
           return user.data;
         } else {
-          throw new Error("ログインに失敗しました");
           return null;
         }
       },
     }),
   ],
+  pages: {
+    signIn: "/auth/signin",
+  },
 });
