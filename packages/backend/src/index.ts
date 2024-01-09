@@ -7,6 +7,7 @@ import {
   getSchedulesByDate,
   updateSchedule,
 } from "@/services/schedule";
+import { postSignIn } from "@/services/user";
 
 const app = express();
 const PORT = 3001;
@@ -52,6 +53,14 @@ app.delete("/api/schedule/delete/:id", async (req, res) => {
 app.post("/api/schedule/edit/:id", async (req, res) => {
   const data = req.body;
   const result = await updateSchedule(data);
+
+  res.json(result);
+});
+
+app.post("/api/user/signin", async (req, res) => {
+  const data = req.body;
+
+  const result = await postSignIn(data);
 
   res.json(result);
 });

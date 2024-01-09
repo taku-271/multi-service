@@ -12,6 +12,7 @@ async function main() {
       description: "Description 1",
       start: new Date("2023/12/7"),
       end: new Date("2023/12/7"),
+      isAllDay: true,
     },
   });
 
@@ -24,6 +25,7 @@ async function main() {
       description: "Description 2",
       start: new Date("2023/12/6"),
       end: new Date("2023/12/6"),
+      isAllDay: true,
     },
   });
 }
