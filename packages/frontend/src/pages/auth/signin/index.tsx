@@ -41,9 +41,6 @@ const SignIn = ({ csrfToken }: SignInProps) => {
         <Button type="submit" variant="contained" sx={{ mr: "10%" }}>
           サインイン
         </Button>
-        <Button onClick={() => router.push("/auth/signup")} variant="contained">
-          新規登録
-        </Button>
       </form>
     </Box>
   );

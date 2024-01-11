@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import md5 from "md5";
 import axios from "axios";
-import { exit } from "process";
 
 export default NextAuth({
   providers: [

@@ -7,7 +7,7 @@ import {
   getSchedulesByDate,
   updateSchedule,
 } from "@/services/schedule";
-import { postSignIn } from "@/services/user";
+import { createUser, postSignIn } from "@/services/user";
 
 const app = express();
 const PORT = 3001;
@@ -61,6 +61,14 @@ app.post("/api/user/signin", async (req, res) => {
   const data = req.body;
 
   const result = await postSignIn(data);
+
+  res.json(result);
+});
+
+app.post("/api/user/create", async (req, res) => {
+  const data = req.body;
+
+  const result = await createUser(data);
 
   res.json(result);
 });

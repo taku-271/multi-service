@@ -31,3 +31,9 @@ export type updateScheduleType = {
   end: Date;
   isAllDay: boolean;
 };
+
+export type createUserType = {
+  name: string;
+  email: string;
+  password: string;
+};

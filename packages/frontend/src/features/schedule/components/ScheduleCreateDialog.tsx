@@ -48,8 +48,6 @@ export const ScheduleCreateDialog = ({
     if (schedule.isAllDay) {
       setSchedule({ ...schedule, start: selectedDate, end: selectedDate });
     }
-    // FIXME
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [schedule.isAllDay, selectedDate]);
 
   const onChangeSchedule = (
@@ -72,7 +70,6 @@ export const ScheduleCreateDialog = ({
     }
   };
 
-  // FIXME: state関連のバグあり
   const onCreateScheduleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -81,7 +78,6 @@ export const ScheduleCreateDialog = ({
       return;
     }
 
-    console.log(schedule);
     createSchedule(schedule);
     setSchedule(initSchedule);
     onCloseCreateDialog();
