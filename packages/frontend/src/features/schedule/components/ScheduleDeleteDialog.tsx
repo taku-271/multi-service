@@ -34,7 +34,9 @@ export const ScheduleDeleteDialog = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={onCloseDeleteDialog}>いいえ</Button>
-        <Button onClick={onDeleteSchedule}>はい</Button>
+        <Button onClick={onDeleteSchedule} color="error">
+          はい
+        </Button>
       </DialogActions>
     </Dialog>
   );

@@ -5,10 +5,8 @@ import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import jaLocale from "@fullcalendar/core/locales/ja";
 import { ScheduleDetailDialog } from "@/features/schedule/components/ScheduleDetailDialog";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useGetSchedules } from "@/features/schedule/hooks/store";
-import { formatYearMonthDateForEvents } from "@/utils/formatDate";
-import { eventScheduleType } from "@/types/types";
 import { Box, Button, CircularProgress } from "@mui/material";
 import { useRouter } from "next/router";
 
@@ -28,7 +26,7 @@ const ScheduleCalendar = () => {
   };
 
   return (
-    <>
+    <Box sx={{ px: "10%" }}>
       <Box sx={{ m: 2 }}>
         <Button variant="contained" onClick={() => push("/")}>
           トップへ
@@ -37,7 +35,18 @@ const ScheduleCalendar = () => {
       {isGetSchedulesLoading ? (
         <CircularProgress />
       ) : (
-        <>
+        <Box
+          sx={{
+            "& .fc .fc-scrollgrid-sync-inner": {
+              "&:has(.fc-col-header-cell-cushion)": {
+                background: "#65BBE9",
+              },
+            },
+            "& .fc-daygrid-day-frame.fc-scrollgrid-sync-inner": {
+              background: "#fff",
+            },
+          }}
+        >
           <FullCalendar
             plugins={[
               dayGridPlugin,
@@ -57,15 +66,16 @@ const ScheduleCalendar = () => {
             dateClick={onEventClick}
             locales={[jaLocale]}
             locale="ja"
+            height="90vh"
           />
           <ScheduleDetailDialog
             selectedDate={selectedDate}
             isDetailDialogOpen={isDetailDialogOpen}
             onCloseDetailDialog={onCloseDetailDialog}
           />
-        </>
+        </Box>
       )}
-    </>
+    </Box>
   );
 };
 
