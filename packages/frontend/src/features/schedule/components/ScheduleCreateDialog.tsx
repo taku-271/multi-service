@@ -83,7 +83,6 @@ export const ScheduleCreateDialog = ({
       return;
     }
 
-    console.log(schedule);
     createSchedule(schedule);
     setSchedule(initSchedule);
     onCloseCreateDialog();
