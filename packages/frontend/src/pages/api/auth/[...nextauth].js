@@ -4,28 +4,29 @@ import md5 from "md5";
 import axios from "axios";
 
 export default NextAuth({
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     CredentialsProvider({
+      id: "credentials",
       name: "Credentials",
       credentials: {
         email: {
-          label: "メールアドレス",
+          label: "email",
           type: "email",
           placeholder: "メールアドレスを入力してください",
         },
-        password: { label: "パスワード", type: "password" },
+        password: { label: "password", type: "password" },
       },
 
       async authorize(credentials) {
         const { email, password } = credentials;
-
-        const hashedPassword = md5(password);
-
         const user = await axios.post("http://localhost:3001/api/user/signin", {
           email,
         });
 
-        if (user.data && user.data.password === hashedPassword) {
+        if (user.data && user.data.password === password) {
           return user.data;
         } else {
           return null;
@@ -35,5 +36,27 @@ export default NextAuth({
   ],
   pages: {
     signIn: "/auth/signin",
+  },
+
+  callbacks: {
+    jwt: async ({ token, user, account }) => {
+      if (user) {
+        token.user = user;
+        token.id = user.id;
+      }
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      return token;
+    },
+    session: ({ session, token }) => {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.id,
+        },
+      };
+    },
   },
 });

@@ -26,20 +26,24 @@ const SignIn = ({ csrfToken }: SignInProps) => {
       <form method="post" action="/api/auth/callback/credentials">
         <Input name="csrfToken" type="hidden" defaultValue={csrfToken} />
         <FormControl color="primary" sx={{ width: "100%", mb: 3 }}>
-          <FormLabel htmlFor="title">メールアドレス</FormLabel>
-          <Input type="email" name="email" fullWidth />
+          <FormLabel htmlFor="email">メールアドレス</FormLabel>
+          <Input type="email" name="email" id="email" fullWidth />
         </FormControl>
         <FormControl color="primary" sx={{ width: "100%", mb: 3 }}>
-          <FormLabel htmlFor="title">パスワード</FormLabel>
-          <Input type="password" name="password" fullWidth />
+          <FormLabel htmlFor="password">パスワード</FormLabel>
+          <Input type="password" name="password" id="password" fullWidth />
         </FormControl>
         {error && (
           <Typography color="red" mb="1em">
             メールアドレスまたはパスワードが違います。
+            {error}
           </Typography>
         )}
         <Button type="submit" variant="contained" sx={{ mr: "10%" }}>
           サインイン
+        </Button>
+        <Button onClick={() => router.push("/auth/signup")} variant="outlined">
+          新規作成
         </Button>
       </form>
     </Box>
