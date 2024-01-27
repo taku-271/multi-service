@@ -43,14 +43,17 @@ export const ScheduleCreateDialog = ({
 
   const { createSchedule } = useCreateSchedule();
   const [schedule, setSchedule] = useState<ScheduleInfo>(initSchedule);
+  const isAllDay = schedule.isAllDay;
 
   useEffect(() => {
-    if (schedule.isAllDay) {
-      setSchedule({ ...schedule, start: selectedDate, end: selectedDate });
+    if (isAllDay) {
+      setSchedule((schedule) => ({
+        ...schedule,
+        start: selectedDate,
+        end: selectedDate,
+      }));
     }
-    // FIXME
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [schedule.isAllDay, selectedDate]);
+  }, [isAllDay, selectedDate]);
 
   const onChangeSchedule = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -72,7 +75,6 @@ export const ScheduleCreateDialog = ({
     }
   };
 
-  // FIXME: state関連のバグあり
   const onCreateScheduleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
